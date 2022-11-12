@@ -3,9 +3,10 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../models/agent_map/agent_map.dart';
 import '../../app_paint/state_holders/app_paint_state_holders.dart';
 import '../../visualizer/agent_map_visualizer.dart';
-import '../agent/agent.dart';
+import '../../../models/agent/agent.dart';
 import '../state_holders/agent_controller_state_holders.dart';
 
 import 'dart:ui' as ui;
@@ -60,7 +61,7 @@ class AgentManager {
             : null;
       }
     }
-    agentMapNotifier.update(map);
+    agentMapNotifier.state = map;
   }
 
   void takeStep() async {
@@ -72,12 +73,8 @@ class AgentManager {
         }
       }
     }
-    agentMapNotifier.update(map);
+    agentMapNotifier.state = map;
 
     imageNotifier.state = await _visualizer.visualize(map);
-  }
-
-  void setAgentMap(AgentMap agentMap) {
-    agentMapNotifier.update(agentMap);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../agent_controller/agent/agent.dart';
+import '../../../models/agent/agent.dart';
 import '../models/agent_visualizer.dart';
 
 class EnergyAgentVisualizer implements AgentVisualizer {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:ui' as ui;
 
-import '../agent_controller/state_holders/agent_controller_state_holders.dart';
+import '../../models/agent_map/agent_map.dart';
 import 'agent_visualizers/energy_agent_visualizer.dart';
 import 'models/agent_visualizer.dart';
 import 'models/visualization_type.dart';
