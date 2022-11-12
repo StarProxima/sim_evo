@@ -29,6 +29,8 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(agentManager).start();
 
-    return const AppPaint();
+    return InteractiveViewer(
+      child: const AppPaint(),
+    );
   }
 }

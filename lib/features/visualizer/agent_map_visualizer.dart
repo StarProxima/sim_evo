@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'dart:ui' as ui;
 
@@ -9,6 +10,12 @@ import '../../models/agent_map/agent_map.dart';
 import 'agent_visualizers/energy_agent_visualizer.dart';
 import 'models/agent_visualizer.dart';
 import 'models/visualization_type.dart';
+import 'state_holders/agent_map_visualization_type.dart';
+
+final agentMapVisualizer = Provider<AgentMapVisualizer>((ref) {
+  final type = ref.watch(agentMapVisualizationType);
+  return AgentMapVisualizer(type);
+});
 
 class AgentMapVisualizer {
   late AgentVisualizer _agentVisualizer;
@@ -20,10 +27,6 @@ class AgentMapVisualizer {
         break;
       default:
     }
-  }
-
-  factory AgentMapVisualizer.energy() {
-    return AgentMapVisualizer(VisualizationType.energy);
   }
 
   Future<ui.Image> visualize(AgentMap agentMap) async {

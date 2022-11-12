@@ -14,22 +14,25 @@ import 'dart:ui' as ui;
 final agentManager = Provider<AgentManager>((ref) {
   return AgentManager(
     agentMapNotifier: ref.watch(agentMap.notifier),
+    visualizer: ref.watch(agentMapVisualizer),
     imageNotifier: ref.watch(appPaintImage.notifier),
   );
 });
 
 class AgentManager {
   final AgentMapNotifier agentMapNotifier;
+
+  final AgentMapVisualizer visualizer;
+
   final StateController<ui.Image?> imageNotifier;
 
   AgentMap get agentMap => agentMapNotifier.state;
 
   AgentManager({
     required this.agentMapNotifier,
+    required this.visualizer,
     required this.imageNotifier,
   });
-
-  final _visualizer = AgentMapVisualizer.energy();
 
   late final Timer? _timer;
 
@@ -73,8 +76,9 @@ class AgentManager {
         }
       }
     }
+
     agentMapNotifier.state = map;
 
-    imageNotifier.state = await _visualizer.visualize(map);
+    imageNotifier.state = await visualizer.visualize(map);
   }
 }
