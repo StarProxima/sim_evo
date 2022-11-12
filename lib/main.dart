@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'features/agent_controller/manager/agent_manager.dart';
 import 'features/app_paint/app_paint.dart';
 
 void main() {
@@ -26,6 +27,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(agentManager).start();
+
     return const AppPaint();
   }
 }
