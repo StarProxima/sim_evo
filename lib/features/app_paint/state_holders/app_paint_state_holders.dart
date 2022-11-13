@@ -7,5 +7,5 @@ final appPaintImage = StateProvider<ui.Image?>((ref) {
 });
 
 final appPaintSize = StateProvider<Size>((ref) {
-  return const Size(600, 350);
+  return const Size(800, 500);
 });

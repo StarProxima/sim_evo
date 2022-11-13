@@ -10,12 +10,20 @@ import '../../models/agent_map/agent_map.dart';
 import 'agent_visualizers/energy_agent_visualizer.dart';
 import 'models/agent_visualizer.dart';
 import 'models/visualization_type.dart';
-import 'state_holders/agent_map_visualization_type.dart';
 
-final agentMapVisualizer = Provider<AgentMapVisualizer>((ref) {
-  final type = ref.watch(agentMapVisualizationType);
-  return AgentMapVisualizer(type);
+final agentMapVisualizer =
+    StateNotifierProvider<AgentMapVisualizerNotifier, AgentMapVisualizer>(
+        (ref) {
+  return AgentMapVisualizerNotifier();
 });
+
+class AgentMapVisualizerNotifier extends StateNotifier<AgentMapVisualizer> {
+  AgentMapVisualizerNotifier()
+      : super(AgentMapVisualizer(VisualizationType.energy));
+
+  @override
+  AgentMapVisualizer get state => super.state;
+}
 
 class AgentMapVisualizer {
   late AgentVisualizer _agentVisualizer;

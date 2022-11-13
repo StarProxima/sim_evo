@@ -14,7 +14,7 @@ class AppPaint extends ConsumerWidget {
     final size = ref.watch(appPaintSize);
     return CustomPaint(
       painter: image != null ? ImagePainter(image: image) : null,
-      size: size,
+      size: Size.infinite,
     );
   }
 }

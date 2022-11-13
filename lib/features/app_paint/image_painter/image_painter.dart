@@ -7,7 +7,7 @@ class ImagePainter extends CustomPainter {
 
   ImagePainter({
     required this.image,
-    this.scale = 3,
+    this.scale = 1,
   });
 
   @override

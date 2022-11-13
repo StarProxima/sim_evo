@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'features/agent_controller/manager/agent_manager.dart';
 import 'features/app_paint/app_paint.dart';
+import 'features/side_panel/view/side_panel.dart';
 
 void main() {
   runApp(
@@ -27,10 +27,21 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(agentManager).start();
-
-    return InteractiveViewer(
-      child: const AppPaint(),
+    return Scaffold(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: InteractiveViewer(
+              maxScale: 50,
+              minScale: 0.1,
+              constrained: true,
+              child: const AppPaint(),
+            ),
+          ),
+          const SidePanel(),
+        ],
+      ),
     );
   }
 }
