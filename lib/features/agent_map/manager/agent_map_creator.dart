@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/rendering.dart';
 
 import '../../../data/data_models/agent/agent.dart';
+import '../../../data/data_models/pos/pos.dart';
 import '../../../data/models/agent_map/agent_map.dart';
-import 'agent_map_stepper.dart';
 
 class AgentMapCreator {
   final _random = Random();

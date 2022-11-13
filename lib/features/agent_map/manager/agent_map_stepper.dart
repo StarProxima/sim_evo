@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import '../../../data/data_models/agent/agent.dart';
+import '../../../data/data_models/pos/pos.dart';
 import '../../../data/models/agent_map/agent_map.dart';
 
 class AgentMapStepper {
@@ -65,11 +66,4 @@ class AgentMapStepper {
       map[pos] = null;
     }
   }
-}
-
-class Pos {
-  final int x;
-  final int y;
-
-  Pos(this.x, this.y);
 }
