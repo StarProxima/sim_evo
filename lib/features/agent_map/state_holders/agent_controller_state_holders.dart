@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../models/agent_map/agent_map.dart';
+import '../../../data/models/agent_map/agent_map.dart';
 import '../../app_paint/state_holders/app_paint_state_holders.dart';
 
 final agentMap = StateNotifierProvider<AgentMapNotifier, AgentMap>((ref) {

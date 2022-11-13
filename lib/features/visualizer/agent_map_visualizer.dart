@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'dart:ui' as ui;
 
-import '../../models/agent_map/agent_map.dart';
+import '../../data/models/agent_map/agent_map.dart';
 import 'agent_visualizers/energy_agent_visualizer.dart';
 import 'models/agent_visualizer.dart';
 import 'models/visualization_type.dart';
@@ -26,12 +26,12 @@ class AgentMapVisualizerNotifier extends StateNotifier<AgentMapVisualizer> {
 }
 
 class AgentMapVisualizer {
-  late AgentVisualizer _agentVisualizer;
+  late AgentColorizer _agentColorizer;
 
   AgentMapVisualizer(VisualizationType type) {
     switch (type) {
       case VisualizationType.energy:
-        _agentVisualizer = EnergyAgentVisualizer();
+        _agentColorizer = EnergyAgentColorizer();
         break;
       default:
     }
@@ -47,9 +47,9 @@ class AgentMapVisualizer {
 
     for (var i = 0; i < height; i++) {
       for (var j = 0; j < width; j++) {
-        final agent = agentMap[i][j];
+        final agent = agentMap(i, j);
         if (agent != null) {
-          pixels[i * width + j] = _agentVisualizer(agent);
+          pixels[i * width + j] = _agentColorizer.colorize(agent);
         }
       }
     }

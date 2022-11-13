@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../agent_controller/manager/agent_map_manager.dart';
+import '../../agent_map/manager/agent_map_manager.dart';
 
 final sidePanelManager = Provider<SidePanelManager>((ref) {
   return SidePanelManager(

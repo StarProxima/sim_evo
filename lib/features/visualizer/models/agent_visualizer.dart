@@ -1,5 +1,5 @@
-import '../../../models/agent/agent.dart';
+import '../../../data/data_models/agent/agent.dart';
 
-abstract class AgentVisualizer {
-  int call(Agent? agent);
+abstract class AgentColorizer {
+  int colorize(Agent agent);
 }

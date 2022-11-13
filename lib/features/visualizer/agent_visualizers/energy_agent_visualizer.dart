@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/agent/agent.dart';
+import '../../../data/data_models/agent/agent.dart';
 import '../models/agent_visualizer.dart';
 
-class EnergyAgentVisualizer implements AgentVisualizer {
+class EnergyAgentColorizer implements AgentColorizer {
   static const color1 = Colors.yellow;
   static const color2 = Colors.orange;
 
   @override
-  int call(Agent? agent) {
-    if (agent == null) return Colors.black.value;
+  int colorize(Agent agent) {
     return Color.lerp(color1, color2, agent.energy / 100)!.value;
   }
 }
