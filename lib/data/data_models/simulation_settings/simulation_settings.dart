@@ -9,7 +9,7 @@ class SimulationSettings with _$SimulationSettings {
   factory SimulationSettings({
     required Size size,
     required int stepPerSec,
-    required int framesSkip,
+    required int framePerSec,
     required bool active,
   }) = _SimulationSettings;
 }

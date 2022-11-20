@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import '../../../data/data_models/agent/agent.dart';
-import '../../../data/data_models/pos/pos.dart';
-import '../../../data/models/world_map/world_map.dart';
+import '../data/data_models/agent/agent.dart';
+import '../data/data_models/pos/pos.dart';
+import '../data/models/world_map/world_map.dart';
 
-class AgentStepper {
+class AgentController {
   final _random = Random();
 
   WorldMap takeStep(WorldMap map) {
@@ -48,15 +48,13 @@ class AgentStepper {
       }
     }
 
-    if (true) {
-      final nearPos = randNearPos(map, pos);
-      if (map.agent[nearPos] != null) {
-        final nearAgent = map.agent[nearPos]!;
+    final nearPos = randNearPos(map, pos);
+    if (map.agent[nearPos] != null) {
+      final nearAgent = map.agent[nearPos]!;
 
-        final e = (agent.energy - nearAgent.energy).abs() ~/ 10;
-
-        agent.energy += e;
-        nearAgent.energy -= e;
+      if (nearAgent.energy < 10) {
+        agent.energy += 10;
+        nearAgent.energy -= 10;
       }
     }
 

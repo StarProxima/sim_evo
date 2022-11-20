@@ -19,20 +19,11 @@ class SimulationStatsNotifier extends StateNotifier<SimulationStats> {
     state = state.copyWith(startTime: startTime);
   }
 
-  void editStepCount(int stepCount) {
-    state = state.copyWith(stepCount: stepCount);
-  }
-
-  void editAgentCount(int agentCount) {
-    state = state.copyWith(agentCount: agentCount);
-  }
-
-  void editNatureCount(int natureCount) {
-    state = state.copyWith(natureCount: natureCount);
-  }
-
-  void editTotalEnergy(double totalEnergy) {
-    state = state.copyWith(totalEnergy: totalEnergy);
+  void edit(SimulationStats stats) {
+    state = stats.copyWith(
+      totalCount: stats.agentCount + stats.natureCount,
+      totalEnergy: stats.agentEnergy + stats.natureEnergy,
+    );
   }
 
   void reset() {

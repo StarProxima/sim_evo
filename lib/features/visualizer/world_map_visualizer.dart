@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'dart:ui' as ui;
 
-import '../../data/models/world_map/world_map.dart';
+import '../../state_holders/world_map.dart';
 import 'agent_visualizers/energy_agent_visualizer.dart';
 import 'models/agent_visualizer.dart';
 import 'models/visualization_type.dart';
@@ -14,23 +14,25 @@ import 'models/visualization_type.dart';
 class WorldMapVisualizer {
   late AgentColorizer _agentColorizer;
 
-  late StateController<ui.Image?> _imageNotifier;
+  final StateController<ui.Image?> imageNotifier;
+
+  final WorldMapNotifier worldMapNotifier;
 
   WorldMapVisualizer({
     required VisualizationType type,
-    required StateController<ui.Image?> imageNotifier,
+    required this.imageNotifier,
+    required this.worldMapNotifier,
   }) {
     switch (type) {
       case VisualizationType.energy:
         _agentColorizer = EnergyAgentColorizer();
         break;
     }
-
-    _imageNotifier = imageNotifier;
   }
 
-  void visualize(WorldMap agentMap) async {
-    final size = agentMap.size;
+  void visualize() async {
+    final map = worldMapNotifier.state;
+    final size = map.size;
     final width = size.width.toInt();
     final height = size.height.toInt();
     final length = width * height;
@@ -39,7 +41,7 @@ class WorldMapVisualizer {
 
     for (var i = 0; i < height; i++) {
       for (var j = 0; j < width; j++) {
-        final agent = agentMap.agent(i, j);
+        final agent = map.agent(i, j);
         if (agent != null) {
           pixels[i * width + j] = _agentColorizer.colorize(agent);
         }
@@ -51,7 +53,7 @@ class WorldMapVisualizer {
       pixels: pixels,
     );
 
-    _imageNotifier.state = image;
+    imageNotifier.state = image;
   }
 
   Future<ui.Image> _imageByUint32List({

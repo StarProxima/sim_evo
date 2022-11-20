@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SimulationSettings {
   Size get size => throw _privateConstructorUsedError;
   int get stepPerSec => throw _privateConstructorUsedError;
-  int get framesSkip => throw _privateConstructorUsedError;
+  int get framePerSec => throw _privateConstructorUsedError;
   bool get active => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +32,7 @@ abstract class $SimulationSettingsCopyWith<$Res> {
           SimulationSettings value, $Res Function(SimulationSettings) then) =
       _$SimulationSettingsCopyWithImpl<$Res, SimulationSettings>;
   @useResult
-  $Res call({Size size, int stepPerSec, int framesSkip, bool active});
+  $Res call({Size size, int stepPerSec, int framePerSec, bool active});
 }
 
 /// @nodoc
@@ -50,7 +50,7 @@ class _$SimulationSettingsCopyWithImpl<$Res, $Val extends SimulationSettings>
   $Res call({
     Object? size = null,
     Object? stepPerSec = null,
-    Object? framesSkip = null,
+    Object? framePerSec = null,
     Object? active = null,
   }) {
     return _then(_value.copyWith(
@@ -62,9 +62,9 @@ class _$SimulationSettingsCopyWithImpl<$Res, $Val extends SimulationSettings>
           ? _value.stepPerSec
           : stepPerSec // ignore: cast_nullable_to_non_nullable
               as int,
-      framesSkip: null == framesSkip
-          ? _value.framesSkip
-          : framesSkip // ignore: cast_nullable_to_non_nullable
+      framePerSec: null == framePerSec
+          ? _value.framePerSec
+          : framePerSec // ignore: cast_nullable_to_non_nullable
               as int,
       active: null == active
           ? _value.active
@@ -82,7 +82,7 @@ abstract class _$$_SimulationSettingsCopyWith<$Res>
       __$$_SimulationSettingsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Size size, int stepPerSec, int framesSkip, bool active});
+  $Res call({Size size, int stepPerSec, int framePerSec, bool active});
 }
 
 /// @nodoc
@@ -98,7 +98,7 @@ class __$$_SimulationSettingsCopyWithImpl<$Res>
   $Res call({
     Object? size = null,
     Object? stepPerSec = null,
-    Object? framesSkip = null,
+    Object? framePerSec = null,
     Object? active = null,
   }) {
     return _then(_$_SimulationSettings(
@@ -110,9 +110,9 @@ class __$$_SimulationSettingsCopyWithImpl<$Res>
           ? _value.stepPerSec
           : stepPerSec // ignore: cast_nullable_to_non_nullable
               as int,
-      framesSkip: null == framesSkip
-          ? _value.framesSkip
-          : framesSkip // ignore: cast_nullable_to_non_nullable
+      framePerSec: null == framePerSec
+          ? _value.framePerSec
+          : framePerSec // ignore: cast_nullable_to_non_nullable
               as int,
       active: null == active
           ? _value.active
@@ -128,7 +128,7 @@ class _$_SimulationSettings extends _SimulationSettings {
   _$_SimulationSettings(
       {required this.size,
       required this.stepPerSec,
-      required this.framesSkip,
+      required this.framePerSec,
       required this.active})
       : super._();
 
@@ -137,13 +137,13 @@ class _$_SimulationSettings extends _SimulationSettings {
   @override
   final int stepPerSec;
   @override
-  final int framesSkip;
+  final int framePerSec;
   @override
   final bool active;
 
   @override
   String toString() {
-    return 'SimulationSettings(size: $size, stepPerSec: $stepPerSec, framesSkip: $framesSkip, active: $active)';
+    return 'SimulationSettings(size: $size, stepPerSec: $stepPerSec, framePerSec: $framePerSec, active: $active)';
   }
 
   @override
@@ -154,14 +154,14 @@ class _$_SimulationSettings extends _SimulationSettings {
             (identical(other.size, size) || other.size == size) &&
             (identical(other.stepPerSec, stepPerSec) ||
                 other.stepPerSec == stepPerSec) &&
-            (identical(other.framesSkip, framesSkip) ||
-                other.framesSkip == framesSkip) &&
+            (identical(other.framePerSec, framePerSec) ||
+                other.framePerSec == framePerSec) &&
             (identical(other.active, active) || other.active == active));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, size, stepPerSec, framesSkip, active);
+      Object.hash(runtimeType, size, stepPerSec, framePerSec, active);
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +175,7 @@ abstract class _SimulationSettings extends SimulationSettings {
   factory _SimulationSettings(
       {required final Size size,
       required final int stepPerSec,
-      required final int framesSkip,
+      required final int framePerSec,
       required final bool active}) = _$_SimulationSettings;
   _SimulationSettings._() : super._();
 
@@ -184,7 +184,7 @@ abstract class _SimulationSettings extends SimulationSettings {
   @override
   int get stepPerSec;
   @override
-  int get framesSkip;
+  int get framePerSec;
   @override
   bool get active;
   @override

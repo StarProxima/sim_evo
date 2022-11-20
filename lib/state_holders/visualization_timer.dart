@@ -5,8 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/data_models/simulation_settings/simulation_settings.dart';
 
-final worldTimer = StateNotifierProvider<WorldTimerNotifier, Timer>((ref) {
-  return WorldTimerNotifier(
+final visualizationTimer =
+    StateNotifierProvider<VisualizationTimerNotifier, Timer>((ref) {
+  return VisualizationTimerNotifier(
     Timer(
       Duration.zero,
       () {},
@@ -14,8 +15,8 @@ final worldTimer = StateNotifierProvider<WorldTimerNotifier, Timer>((ref) {
   );
 });
 
-class WorldTimerNotifier extends StateNotifier<Timer> {
-  WorldTimerNotifier(super.state);
+class VisualizationTimerNotifier extends StateNotifier<Timer> {
+  VisualizationTimerNotifier(super.state);
 
   @override
   Timer get state => super.state;
@@ -25,10 +26,10 @@ class WorldTimerNotifier extends StateNotifier<Timer> {
     VoidCallback callback,
   ) {
     state.cancel();
-    if (settings.stepPerSec > 0) {
+    if (settings.framePerSec > 0) {
       state = Timer.periodic(
         Duration(
-          milliseconds: 1000 ~/ settings.stepPerSec,
+          milliseconds: 1000 ~/ settings.framePerSec,
         ),
         (timer) {
           if (settings.active) callback();

@@ -36,10 +36,13 @@ class HomePage extends ConsumerWidget {
               maxScale: 50,
               minScale: 0.1,
               constrained: true,
-              child: const AppPaint(),
+              child: const Padding(
+                padding: EdgeInsets.all(8),
+                child: AppPaint(),
+              ),
             ),
           ),
-          const SidePanel(),
+          SidePanel(),
         ],
       ),
     );

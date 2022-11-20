@@ -16,11 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SimulationStats {
-  DateTime get startTime => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
   int get stepCount => throw _privateConstructorUsedError;
   int get agentCount => throw _privateConstructorUsedError;
   int get natureCount => throw _privateConstructorUsedError;
-  double get totalEnergy => throw _privateConstructorUsedError;
+  int get totalCount => throw _privateConstructorUsedError;
+  int get agentEnergy => throw _privateConstructorUsedError;
+  int get natureEnergy => throw _privateConstructorUsedError;
+  int get totalEnergy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SimulationStatsCopyWith<SimulationStats> get copyWith =>
@@ -34,11 +37,14 @@ abstract class $SimulationStatsCopyWith<$Res> {
       _$SimulationStatsCopyWithImpl<$Res, SimulationStats>;
   @useResult
   $Res call(
-      {DateTime startTime,
+      {DateTime? startTime,
       int stepCount,
       int agentCount,
       int natureCount,
-      double totalEnergy});
+      int totalCount,
+      int agentEnergy,
+      int natureEnergy,
+      int totalEnergy});
 }
 
 /// @nodoc
@@ -54,17 +60,20 @@ class _$SimulationStatsCopyWithImpl<$Res, $Val extends SimulationStats>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startTime = null,
+    Object? startTime = freezed,
     Object? stepCount = null,
     Object? agentCount = null,
     Object? natureCount = null,
+    Object? totalCount = null,
+    Object? agentEnergy = null,
+    Object? natureEnergy = null,
     Object? totalEnergy = null,
   }) {
     return _then(_value.copyWith(
-      startTime: null == startTime
+      startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       stepCount: null == stepCount
           ? _value.stepCount
           : stepCount // ignore: cast_nullable_to_non_nullable
@@ -77,10 +86,22 @@ class _$SimulationStatsCopyWithImpl<$Res, $Val extends SimulationStats>
           ? _value.natureCount
           : natureCount // ignore: cast_nullable_to_non_nullable
               as int,
+      totalCount: null == totalCount
+          ? _value.totalCount
+          : totalCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      agentEnergy: null == agentEnergy
+          ? _value.agentEnergy
+          : agentEnergy // ignore: cast_nullable_to_non_nullable
+              as int,
+      natureEnergy: null == natureEnergy
+          ? _value.natureEnergy
+          : natureEnergy // ignore: cast_nullable_to_non_nullable
+              as int,
       totalEnergy: null == totalEnergy
           ? _value.totalEnergy
           : totalEnergy // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
     ) as $Val);
   }
 }
@@ -94,11 +115,14 @@ abstract class _$$_SimulationStatsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DateTime startTime,
+      {DateTime? startTime,
       int stepCount,
       int agentCount,
       int natureCount,
-      double totalEnergy});
+      int totalCount,
+      int agentEnergy,
+      int natureEnergy,
+      int totalEnergy});
 }
 
 /// @nodoc
@@ -112,17 +136,20 @@ class __$$_SimulationStatsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? startTime = null,
+    Object? startTime = freezed,
     Object? stepCount = null,
     Object? agentCount = null,
     Object? natureCount = null,
+    Object? totalCount = null,
+    Object? agentEnergy = null,
+    Object? natureEnergy = null,
     Object? totalEnergy = null,
   }) {
     return _then(_$_SimulationStats(
-      startTime: null == startTime
+      startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       stepCount: null == stepCount
           ? _value.stepCount
           : stepCount // ignore: cast_nullable_to_non_nullable
@@ -135,10 +162,22 @@ class __$$_SimulationStatsCopyWithImpl<$Res>
           ? _value.natureCount
           : natureCount // ignore: cast_nullable_to_non_nullable
               as int,
+      totalCount: null == totalCount
+          ? _value.totalCount
+          : totalCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      agentEnergy: null == agentEnergy
+          ? _value.agentEnergy
+          : agentEnergy // ignore: cast_nullable_to_non_nullable
+              as int,
+      natureEnergy: null == natureEnergy
+          ? _value.natureEnergy
+          : natureEnergy // ignore: cast_nullable_to_non_nullable
+              as int,
       totalEnergy: null == totalEnergy
           ? _value.totalEnergy
           : totalEnergy // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
     ));
   }
 }
@@ -151,11 +190,14 @@ class _$_SimulationStats extends _SimulationStats {
       required this.stepCount,
       required this.agentCount,
       required this.natureCount,
+      required this.totalCount,
+      required this.agentEnergy,
+      required this.natureEnergy,
       required this.totalEnergy})
       : super._();
 
   @override
-  final DateTime startTime;
+  final DateTime? startTime;
   @override
   final int stepCount;
   @override
@@ -163,11 +205,17 @@ class _$_SimulationStats extends _SimulationStats {
   @override
   final int natureCount;
   @override
-  final double totalEnergy;
+  final int totalCount;
+  @override
+  final int agentEnergy;
+  @override
+  final int natureEnergy;
+  @override
+  final int totalEnergy;
 
   @override
   String toString() {
-    return 'SimulationStats(startTime: $startTime, stepCount: $stepCount, agentCount: $agentCount, natureCount: $natureCount, totalEnergy: $totalEnergy)';
+    return 'SimulationStats(startTime: $startTime, stepCount: $stepCount, agentCount: $agentCount, natureCount: $natureCount, totalCount: $totalCount, agentEnergy: $agentEnergy, natureEnergy: $natureEnergy, totalEnergy: $totalEnergy)';
   }
 
   @override
@@ -183,13 +231,19 @@ class _$_SimulationStats extends _SimulationStats {
                 other.agentCount == agentCount) &&
             (identical(other.natureCount, natureCount) ||
                 other.natureCount == natureCount) &&
+            (identical(other.totalCount, totalCount) ||
+                other.totalCount == totalCount) &&
+            (identical(other.agentEnergy, agentEnergy) ||
+                other.agentEnergy == agentEnergy) &&
+            (identical(other.natureEnergy, natureEnergy) ||
+                other.natureEnergy == natureEnergy) &&
             (identical(other.totalEnergy, totalEnergy) ||
                 other.totalEnergy == totalEnergy));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, startTime, stepCount, agentCount, natureCount, totalEnergy);
+  int get hashCode => Object.hash(runtimeType, startTime, stepCount, agentCount,
+      natureCount, totalCount, agentEnergy, natureEnergy, totalEnergy);
 
   @JsonKey(ignore: true)
   @override
@@ -200,15 +254,18 @@ class _$_SimulationStats extends _SimulationStats {
 
 abstract class _SimulationStats extends SimulationStats {
   factory _SimulationStats(
-      {required final DateTime startTime,
+      {required final DateTime? startTime,
       required final int stepCount,
       required final int agentCount,
       required final int natureCount,
-      required final double totalEnergy}) = _$_SimulationStats;
+      required final int totalCount,
+      required final int agentEnergy,
+      required final int natureEnergy,
+      required final int totalEnergy}) = _$_SimulationStats;
   _SimulationStats._() : super._();
 
   @override
-  DateTime get startTime;
+  DateTime? get startTime;
   @override
   int get stepCount;
   @override
@@ -216,7 +273,13 @@ abstract class _SimulationStats extends SimulationStats {
   @override
   int get natureCount;
   @override
-  double get totalEnergy;
+  int get totalCount;
+  @override
+  int get agentEnergy;
+  @override
+  int get natureEnergy;
+  @override
+  int get totalEnergy;
   @override
   @JsonKey(ignore: true)
   _$$_SimulationStatsCopyWith<_$_SimulationStats> get copyWith =>

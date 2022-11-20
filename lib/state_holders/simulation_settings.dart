@@ -10,7 +10,7 @@ final simulationSettings =
     SimulationSettings(
       size: const Size(100, 100),
       stepPerSec: 4,
-      framesSkip: 0,
+      framePerSec: 60,
       active: false,
     ),
   );
@@ -30,8 +30,8 @@ class SimulationSettingsNotifier extends StateNotifier<SimulationSettings> {
     state = state.copyWith(stepPerSec: stepPerSec);
   }
 
-  void editFrameSkip(int framesSkip) {
-    state = state.copyWith(framesSkip: framesSkip);
+  void editFps(int fps) {
+    state = state.copyWith(framePerSec: fps);
   }
 
   void toggleActive() {
