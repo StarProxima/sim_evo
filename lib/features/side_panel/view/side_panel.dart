@@ -25,8 +25,12 @@ class SidePanel extends ConsumerWidget {
         children: [
           const Text('Side Panel'),
           ElevatedButton(
-            onPressed: manager.start,
-            child: const Text('Start'),
+            onPressed: manager.initialSpawn,
+            child: const Text('initialSpawn'),
+          ),
+          ElevatedButton(
+            onPressed: manager.toggleActive,
+            child: const Text('toggleActive'),
           ),
         ],
       ),

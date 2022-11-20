@@ -1,21 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../agent_map/manager/agent_map_manager.dart';
+import '../../simulation_manager/manager/simulation_manager.dart';
 
 final sidePanelManager = Provider<SidePanelManager>((ref) {
   return SidePanelManager(
-    agentMapManager: ref.watch(agentMapManager),
+    simulationManager: ref.watch(simulationManager),
   );
 });
 
 class SidePanelManager {
-  final AgentMapManager agentMapManager;
+  final SimulationManager simulationManager;
 
   SidePanelManager({
-    required this.agentMapManager,
+    required this.simulationManager,
   });
 
-  void start() {
-    agentMapManager.start();
+  void toggleActive() {
+    simulationManager.toggleActive();
+  }
+
+  void initialSpawn() {
+    simulationManager.initialSpawn();
   }
 }

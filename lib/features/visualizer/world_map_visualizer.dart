@@ -6,38 +6,30 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'dart:ui' as ui;
 
-import '../../data/models/agent_map/agent_map.dart';
+import '../../data/models/world_map/world_map.dart';
 import 'agent_visualizers/energy_agent_visualizer.dart';
 import 'models/agent_visualizer.dart';
 import 'models/visualization_type.dart';
 
-final agentMapVisualizer =
-    StateNotifierProvider<AgentMapVisualizerNotifier, AgentMapVisualizer>(
-        (ref) {
-  return AgentMapVisualizerNotifier();
-});
-
-class AgentMapVisualizerNotifier extends StateNotifier<AgentMapVisualizer> {
-  AgentMapVisualizerNotifier()
-      : super(AgentMapVisualizer(VisualizationType.energy));
-
-  @override
-  AgentMapVisualizer get state => super.state;
-}
-
-class AgentMapVisualizer {
+class WorldMapVisualizer {
   late AgentColorizer _agentColorizer;
 
-  AgentMapVisualizer(VisualizationType type) {
+  late StateController<ui.Image?> _imageNotifier;
+
+  WorldMapVisualizer({
+    required VisualizationType type,
+    required StateController<ui.Image?> imageNotifier,
+  }) {
     switch (type) {
       case VisualizationType.energy:
         _agentColorizer = EnergyAgentColorizer();
         break;
-      default:
     }
+
+    _imageNotifier = imageNotifier;
   }
 
-  Future<ui.Image> visualize(AgentMap agentMap) async {
+  void visualize(WorldMap agentMap) async {
     final size = agentMap.size;
     final width = size.width.toInt();
     final height = size.height.toInt();
@@ -47,7 +39,7 @@ class AgentMapVisualizer {
 
     for (var i = 0; i < height; i++) {
       for (var j = 0; j < width; j++) {
-        final agent = agentMap(i, j);
+        final agent = agentMap.agent(i, j);
         if (agent != null) {
           pixels[i * width + j] = _agentColorizer.colorize(agent);
         }
@@ -59,7 +51,7 @@ class AgentMapVisualizer {
       pixels: pixels,
     );
 
-    return image;
+    _imageNotifier.state = image;
   }
 
   Future<ui.Image> _imageByUint32List({
