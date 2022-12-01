@@ -66,8 +66,9 @@ class AgentController {
       if (map.nature[nearPos] != null) {
         if (agent.energy < 100) {
           final natE = map.nature[nearPos]!.energy;
-          final k = pow((natE > 0 ? natE : 0) / 100.0 + 0.02, 1 / 4) - 0.2;
-          final e = (map.nature[nearPos]!.energy * k + 10).toInt();
+          //final k = pow((natE > 0 ? natE : 0) / 100.0 + 0.02, 1 / 4) - 0.2;
+          final k = ((natE > 0 ? natE : 0) / 100) * 0.5 + 0.25;
+          final e = (natE * k + 10).toInt();
 
           agent.energy += (e * k).toInt();
           map.nature[nearPos]!.energy -= e;

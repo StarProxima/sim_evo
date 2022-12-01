@@ -8,7 +8,7 @@ final simulationSettings =
         (ref) {
   return SimulationSettingsNotifier(
     SimulationSettings(
-      size: const Size(100, 100),
+      size: const Size(300, 300),
       stepPerSec: 4,
       framePerSec: 60,
       active: false,

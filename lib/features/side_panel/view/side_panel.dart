@@ -39,35 +39,35 @@ class SidePanel extends ConsumerWidget {
           const SizedBox(height: 16),
           const SidePanelSkipFrames(),
           const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: viewModel.widthController,
-                  decoration: const InputDecoration(
-                    hintText: 'Width',
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: TextField(
-                  controller: viewModel.heightController,
-                  decoration: const InputDecoration(
-                    hintText: 'Height',
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: manager.editSize,
-            child: const Text('Edit Size'),
-          ),
-          const SizedBox(height: 8),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: TextField(
+          //         controller: viewModel.widthController,
+          //         decoration: const InputDecoration(
+          //           hintText: 'Width',
+          //         ),
+          //         keyboardType: TextInputType.number,
+          //       ),
+          //     ),
+          //     const SizedBox(width: 8),
+          //     Expanded(
+          //       child: TextField(
+          //         controller: viewModel.heightController,
+          //         decoration: const InputDecoration(
+          //           hintText: 'Height',
+          //         ),
+          //         keyboardType: TextInputType.number,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(height: 8),
+          // ElevatedButton(
+          //   onPressed: manager.editSize,
+          //   child: const Text('Edit Size'),
+          // ),
+          //const SizedBox(height: 8),
           ElevatedButton(
             onPressed: manager.initialSpawn,
             child: const Text('initialSpawn'),
