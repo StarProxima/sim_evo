@@ -28,7 +28,7 @@ class WorldTimerNotifier extends StateNotifier<Timer> {
     if (settings.stepPerSec > 0) {
       state = Timer.periodic(
         Duration(
-          milliseconds: 1000 ~/ settings.stepPerSec,
+          microseconds: 1000000 ~/ (settings.stepPerSec),
         ),
         (timer) {
           if (settings.active) callback();

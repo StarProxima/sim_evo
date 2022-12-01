@@ -6,6 +6,5 @@ part 'nature.freezed.dart';
 class Nature with _$Nature {
   factory Nature({
     required int energy,
-    required final bool isMovementAllowed,
   }) = _Nature;
 }

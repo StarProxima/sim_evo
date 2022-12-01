@@ -7,12 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:ui' as ui;
 
 import '../../state_holders/world_map.dart';
-import 'agent_visualizers/energy_agent_visualizer.dart';
-import 'models/agent_visualizer.dart';
+import 'colorizers/energy_colorizer.dart';
+import 'models/colorizer.dart';
 import 'models/visualization_type.dart';
 
 class WorldMapVisualizer {
-  late AgentColorizer _agentColorizer;
+  late Colorizer _colorizer;
 
   final StateController<ui.Image?> imageNotifier;
 
@@ -25,7 +25,7 @@ class WorldMapVisualizer {
   }) {
     switch (type) {
       case VisualizationType.energy:
-        _agentColorizer = EnergyAgentColorizer();
+        _colorizer = EnergyColorizer();
         break;
     }
   }
@@ -43,7 +43,12 @@ class WorldMapVisualizer {
       for (var j = 0; j < width; j++) {
         final agent = map.agent(i, j);
         if (agent != null) {
-          pixels[i * width + j] = _agentColorizer.colorize(agent);
+          pixels[i * width + j] = _colorizer.agent(agent);
+        } else {
+          final nature = map.nature(i, j);
+          if (nature != null) {
+            pixels[i * width + j] = _colorizer.nature(nature);
+          }
         }
       }
     }

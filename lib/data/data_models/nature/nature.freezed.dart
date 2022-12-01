@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Nature {
   int get energy => throw _privateConstructorUsedError;
   set energy(int value) => throw _privateConstructorUsedError;
-  bool get isMovementAllowed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NatureCopyWith<Nature> get copyWith => throw _privateConstructorUsedError;
@@ -29,7 +28,7 @@ abstract class $NatureCopyWith<$Res> {
   factory $NatureCopyWith(Nature value, $Res Function(Nature) then) =
       _$NatureCopyWithImpl<$Res, Nature>;
   @useResult
-  $Res call({int energy, bool isMovementAllowed});
+  $Res call({int energy});
 }
 
 /// @nodoc
@@ -46,17 +45,12 @@ class _$NatureCopyWithImpl<$Res, $Val extends Nature>
   @override
   $Res call({
     Object? energy = null,
-    Object? isMovementAllowed = null,
   }) {
     return _then(_value.copyWith(
       energy: null == energy
           ? _value.energy
           : energy // ignore: cast_nullable_to_non_nullable
               as int,
-      isMovementAllowed: null == isMovementAllowed
-          ? _value.isMovementAllowed
-          : isMovementAllowed // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -67,7 +61,7 @@ abstract class _$$_NatureCopyWith<$Res> implements $NatureCopyWith<$Res> {
       __$$_NatureCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int energy, bool isMovementAllowed});
+  $Res call({int energy});
 }
 
 /// @nodoc
@@ -81,17 +75,12 @@ class __$$_NatureCopyWithImpl<$Res>
   @override
   $Res call({
     Object? energy = null,
-    Object? isMovementAllowed = null,
   }) {
     return _then(_$_Nature(
       energy: null == energy
           ? _value.energy
           : energy // ignore: cast_nullable_to_non_nullable
               as int,
-      isMovementAllowed: null == isMovementAllowed
-          ? _value.isMovementAllowed
-          : isMovementAllowed // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -99,16 +88,14 @@ class __$$_NatureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Nature implements _Nature {
-  _$_Nature({required this.energy, required this.isMovementAllowed});
+  _$_Nature({required this.energy});
 
   @override
   int energy;
-  @override
-  final bool isMovementAllowed;
 
   @override
   String toString() {
-    return 'Nature(energy: $energy, isMovementAllowed: $isMovementAllowed)';
+    return 'Nature(energy: $energy)';
   }
 
   @JsonKey(ignore: true)
@@ -119,14 +106,11 @@ class _$_Nature implements _Nature {
 }
 
 abstract class _Nature implements Nature {
-  factory _Nature(
-      {required int energy, required final bool isMovementAllowed}) = _$_Nature;
+  factory _Nature({required int energy}) = _$_Nature;
 
   @override
   int get energy;
   set energy(int value);
-  @override
-  bool get isMovementAllowed;
   @override
   @JsonKey(ignore: true)
   _$$_NatureCopyWith<_$_Nature> get copyWith =>
