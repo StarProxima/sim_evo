@@ -8,6 +8,7 @@ import '../data/data_models/pos/pos.dart';
 import '../data/data_models/simulation_settings/simulation_settings.dart';
 import '../data/data_models/simulation_stats/simulation_stats.dart';
 import '../data/models/world_map/world_map.dart';
+import '../features/agent_brain/agent_brain.dart';
 import '../state_holders/simulation_settings.dart';
 import '../state_holders/simulation_stats.dart';
 import '../state_holders/world_map.dart';
@@ -41,21 +42,27 @@ class WorldMapManager {
   });
 
   void initialSpawn() {
-    final height = worldMap.size.height;
-    final width = worldMap.size.width;
+    final height = worldMap.size.height.toInt();
+    final width = worldMap.size.width.toInt();
 
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        if (Random().nextInt(500) < 1) {
-          final agent = Agent(id: 0, createdAt: DateTime.now(), energy: 500);
-          worldMap.agent[Pos(j, i)] = agent;
-        }
+    final size = height * width;
 
-        if (Random().nextInt(1000) < 1) {
-          //final agent = Agent(id: 0, createdAt: DateTime.now(), energy: 100);
-          worldMap.nature[Pos(j, i)] = Nature(energy: 30);
-        }
+    for (int i = 0; i < 0.001 * size; i++) {
+      final pos = Pos(Random().nextInt(width), Random().nextInt(height));
+      if (worldMap.agent[pos] == null) {
+        worldMap.agent[pos] = Agent(
+          id: 0,
+          createdAt: DateTime.now(),
+          energy: 3500,
+          direction: Pos(0, 0),
+          brain: AgentBrain(),
+        );
       }
+    }
+
+    for (int i = 0; i < 0.005 * size; i++) {
+      final pos = Pos(Random().nextInt(width), Random().nextInt(height));
+      worldMap.nature[pos] = Nature(energy: 30);
     }
 
     statsNotifier.edit(

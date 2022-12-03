@@ -20,6 +20,10 @@ mixin _$Agent {
   DateTime get createdAt => throw _privateConstructorUsedError;
   int get energy => throw _privateConstructorUsedError;
   set energy(int value) => throw _privateConstructorUsedError;
+  Pos get direction => throw _privateConstructorUsedError;
+  set direction(Pos value) => throw _privateConstructorUsedError;
+  AgentBrain get brain => throw _privateConstructorUsedError;
+  set brain(AgentBrain value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AgentCopyWith<Agent> get copyWith => throw _privateConstructorUsedError;
@@ -30,7 +34,12 @@ abstract class $AgentCopyWith<$Res> {
   factory $AgentCopyWith(Agent value, $Res Function(Agent) then) =
       _$AgentCopyWithImpl<$Res, Agent>;
   @useResult
-  $Res call({int id, DateTime createdAt, int energy});
+  $Res call(
+      {int id,
+      DateTime createdAt,
+      int energy,
+      Pos direction,
+      AgentBrain brain});
 }
 
 /// @nodoc
@@ -49,6 +58,8 @@ class _$AgentCopyWithImpl<$Res, $Val extends Agent>
     Object? id = null,
     Object? createdAt = null,
     Object? energy = null,
+    Object? direction = null,
+    Object? brain = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -63,6 +74,14 @@ class _$AgentCopyWithImpl<$Res, $Val extends Agent>
           ? _value.energy
           : energy // ignore: cast_nullable_to_non_nullable
               as int,
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as Pos,
+      brain: null == brain
+          ? _value.brain
+          : brain // ignore: cast_nullable_to_non_nullable
+              as AgentBrain,
     ) as $Val);
   }
 }
@@ -73,7 +92,12 @@ abstract class _$$_AgentCopyWith<$Res> implements $AgentCopyWith<$Res> {
       __$$_AgentCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, DateTime createdAt, int energy});
+  $Res call(
+      {int id,
+      DateTime createdAt,
+      int energy,
+      Pos direction,
+      AgentBrain brain});
 }
 
 /// @nodoc
@@ -88,6 +112,8 @@ class __$$_AgentCopyWithImpl<$Res> extends _$AgentCopyWithImpl<$Res, _$_Agent>
     Object? id = null,
     Object? createdAt = null,
     Object? energy = null,
+    Object? direction = null,
+    Object? brain = null,
   }) {
     return _then(_$_Agent(
       id: null == id
@@ -102,6 +128,14 @@ class __$$_AgentCopyWithImpl<$Res> extends _$AgentCopyWithImpl<$Res, _$_Agent>
           ? _value.energy
           : energy // ignore: cast_nullable_to_non_nullable
               as int,
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as Pos,
+      brain: null == brain
+          ? _value.brain
+          : brain // ignore: cast_nullable_to_non_nullable
+              as AgentBrain,
     ));
   }
 }
@@ -109,7 +143,12 @@ class __$$_AgentCopyWithImpl<$Res> extends _$AgentCopyWithImpl<$Res, _$_Agent>
 /// @nodoc
 
 class _$_Agent implements _Agent {
-  _$_Agent({required this.id, required this.createdAt, required this.energy});
+  _$_Agent(
+      {required this.id,
+      required this.createdAt,
+      required this.energy,
+      required this.direction,
+      required this.brain});
 
   @override
   final int id;
@@ -117,10 +156,14 @@ class _$_Agent implements _Agent {
   final DateTime createdAt;
   @override
   int energy;
+  @override
+  Pos direction;
+  @override
+  AgentBrain brain;
 
   @override
   String toString() {
-    return 'Agent(id: $id, createdAt: $createdAt, energy: $energy)';
+    return 'Agent(id: $id, createdAt: $createdAt, energy: $energy, direction: $direction, brain: $brain)';
   }
 
   @JsonKey(ignore: true)
@@ -134,7 +177,9 @@ abstract class _Agent implements Agent {
   factory _Agent(
       {required final int id,
       required final DateTime createdAt,
-      required int energy}) = _$_Agent;
+      required int energy,
+      required Pos direction,
+      required AgentBrain brain}) = _$_Agent;
 
   @override
   int get id;
@@ -143,6 +188,12 @@ abstract class _Agent implements Agent {
   @override
   int get energy;
   set energy(int value);
+  @override
+  Pos get direction;
+  set direction(Pos value);
+  @override
+  AgentBrain get brain;
+  set brain(AgentBrain value);
   @override
   @JsonKey(ignore: true)
   _$$_AgentCopyWith<_$_Agent> get copyWith =>

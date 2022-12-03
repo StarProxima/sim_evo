@@ -3,6 +3,7 @@ import 'dart:math';
 import '../../data/data_models/agent/agent.dart';
 import '../../data/data_models/pos/pos.dart';
 import '../../data/models/world_map/world_map.dart';
+import '../../features/agent_brain/agent_brain.dart';
 
 class AgentController {
   final _random = Random();
@@ -43,12 +44,36 @@ class AgentController {
       map.agent[pos] = null;
     }
 
+    final forwardPos = pos + agent.direction;
+
+    final posNorm = map.isPosInBounds(forwardPos);
+
+    double nat = 0;
+
+    if (posNorm && map.nature[forwardPos] != null) {
+      nat = map.nature[forwardPos]!.energy / 100.0;
+    }
+
+    final input = AgentBrainInput(
+      energy: agent.energy / 100.0,
+      natureEnergy: nat,
+    );
+
+    final output = agent.brain.think(input);
+
+    agent.direction = output.direction;
+
     if (agent.energy > 0) {
       if (_random.nextInt(100) < 1 && agent.energy > 75) {
         final nearPos = randNearPos(map, pos);
         if (map.agent[nearPos] == null) {
-          map.agent[nearPos] =
-              Agent(id: 0, createdAt: DateTime.now(), energy: 20);
+          map.agent[nearPos] = Agent(
+            id: 0,
+            createdAt: DateTime.now(),
+            energy: 20,
+            direction: agent.direction,
+            brain: AgentBrain(),
+          );
           agent.energy -= 50;
         }
       }
@@ -63,26 +88,25 @@ class AgentController {
         }
       }
 
-      if (map.nature[nearPos] != null) {
-        if (agent.energy < 100) {
-          final natE = map.nature[nearPos]!.energy;
-          //final k = pow((natE > 0 ? natE : 0) / 100.0 + 0.02, 1 / 4) - 0.2;
-          final k = ((natE > 0 ? natE : 0) / 100) * 0.5 + 0.25;
-          final e = (natE * k + 10).toInt();
-
+      if (posNorm && output.eat && map.nature[forwardPos] != null) {
+        final natE = map.nature[forwardPos]!.energy;
+        //final k = pow((natE > 0 ? natE : 0) / 100.0 + 0.02, 1 / 4) - 0.2;
+        final k = ((natE > 0 ? natE : 0) / 100) * 0.5 + 0.25;
+        final e = (natE * k + 10).toInt();
+        if (agent.energy + e <= 100) {
           agent.energy += (e * k).toInt();
-          map.nature[nearPos]!.energy -= e;
+          map.nature[forwardPos]!.energy -= e;
         }
       }
 
-      if (_random.nextInt(100) < 10) {
-        if (map.agent[nearPos] == null) {
-          map.agent[nearPos] = agent;
+      if (posNorm && output.move) {
+        if (posNorm && map.agent[forwardPos] == null) {
+          map.agent[forwardPos] = agent;
           map.agent[pos] = null;
         }
       }
     } else {
-      final nearPos = randNearPos(map, pos);
+      //final nearPos = randNearPos(map, pos);
 
       // if (map.nature[nearPos] != null && map.nature[nearPos]!.energy < 20) {
       //   if (agent.energy < 100) {

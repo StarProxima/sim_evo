@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:perceptron/perceptron.dart';
 import 'features/app_paint/app_paint.dart';
 import 'features/side_panel/view/side_panel.dart';
 
@@ -42,7 +43,7 @@ class HomePage extends ConsumerWidget {
               ),
             ),
           ),
-          SidePanel(),
+          const SidePanel(),
         ],
       ),
     );
