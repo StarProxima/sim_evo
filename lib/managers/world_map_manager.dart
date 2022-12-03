@@ -41,7 +41,7 @@ class WorldMapManager {
     required this.worldMapNotifier,
   });
 
-  void initialSpawn() {
+  void spawnAgent() {
     final height = worldMap.size.height.toInt();
     final width = worldMap.size.width.toInt();
 
@@ -53,17 +53,29 @@ class WorldMapManager {
         worldMap.agent[pos] = Agent(
           id: 0,
           createdAt: DateTime.now(),
-          energy: 3500,
+          energy: Random().nextInt(100),
           direction: Pos(0, 0),
           brain: AgentBrain(),
         );
       }
     }
+  }
+
+  void spawnNature() {
+    final height = worldMap.size.height.toInt();
+    final width = worldMap.size.width.toInt();
+
+    final size = height * width;
 
     for (int i = 0; i < 0.005 * size; i++) {
       final pos = Pos(Random().nextInt(width), Random().nextInt(height));
       worldMap.nature[pos] = Nature(energy: 30);
     }
+  }
+
+  void initialSpawn() {
+    spawnAgent();
+    spawnNature();
 
     statsNotifier.edit(
       stats.copyWith(
@@ -89,6 +101,10 @@ class WorldMapManager {
           natureEnergy += worldMap.nature(i, j)!.energy;
         }
       }
+    }
+
+    if (agentCount < 50) {
+      spawnAgent();
     }
 
     statsNotifier.edit(

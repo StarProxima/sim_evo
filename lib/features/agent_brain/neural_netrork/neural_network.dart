@@ -6,6 +6,8 @@ class NeuralNetwork {
   late List<Layer> layers = [];
   late int biasCount;
 
+  final _random = Random();
+
   NeuralNetwork(this.biasCount, List<int> sizes) {
     for (int i = 0; i < sizes.length; i++) {
       int nextSize = 0;
@@ -23,94 +25,71 @@ class NeuralNetwork {
 
       for (int j = 0; j < sizes[i] + isBiasLayer; j++) {
         for (int k = 0; k < nextSize; k++) {
-          layers[i].weights[j][k] = Random().nextDouble() * 2 - 1;
+          layers[i].weights[j][k] = _random.nextDouble() * 2 - 1;
         }
       }
     }
   }
 
-  //  NeuralNetwork(NeuralNetwork neural, float mutationWeights = 0, float mutationNeurons = 0)
-  // {
+  NeuralNetwork.clone(
+    NeuralNetwork neural, [
+    double mutationWeights = 0,
+    double mutationNeurons = 0,
+  ]) {
+    final List<int> sizes = [];
+    for (int i = 0; i < neural.layers.length; i++) {
+      sizes.add(neural.layers[i].size);
+    }
 
-  //     int[] sizes = int[neural.layers.length];
-  //     for(int i = 0; i < neural.layers.length; i++)
-  //     {
-  //         sizes[i] = neural.layers[i].size;
-  //     }
-  //     float rand = UnityEngine.Random.value;
+    double rand = _random.nextDouble();
 
-  //     int randNeuron;
-  //     if (rand > mutationWeights)
-  //     {
-  //         mutationWeights = 0;
-  //     }
+    int randNeuron;
+    if (rand > mutationWeights) {
+      mutationWeights = 0;
+    }
 
-  //     layers = Layer[neural.layers.length];
-  //     biasCount = neural.biasCount;
-  //     for (int i = 0; i < neural.layers.length; i++)
-  //     {
-  //         randNeuron = 0;
-  //         int nextSize = 0;
-  //         int isBiasLayer = 0;
+    biasCount = neural.biasCount;
+    for (int i = 0; i < neural.layers.length; i++) {
+      randNeuron = 0;
+      int nextSize = 0;
+      int isBiasLayer = 0;
 
-  //         if (i < neural.layers.length - 2 && mutationWeights != 0)
-  //         {
-  //             float randNeurons = UnityEngine.Random.value;
-  //             if (randNeurons < mutationNeurons)
-  //             {
-  //                 randNeuron = Random.Range(-1, 2);
-  //                 if(sizes[i + 1] > 1 && sizes[i + 1] < 16) {
-  //                   sizes[i+1] += randNeuron;
-  //                 }
-  //             }
+      if (i < neural.layers.length - 1) {
+        if (i + 1 < biasCount) {
+          nextSize = sizes[i + 1] - 1;
+        } else {
+          nextSize = sizes[i + 1];
+        }
+      }
 
-  //         }
+      if (i < neural.biasCount) {
+        isBiasLayer = 1;
+        layers.add(Layer(sizes[i] - 1, nextSize, true));
+      } else {
+        layers.add(Layer(sizes[i], nextSize, false));
+      }
 
-  //         if (i < neural.layers.length-1)
-  //         {
-  //             if(i+1 < biasCount) {
-  //               nextSize = sizes[i+1] - 1;
-  //             } else {
-  //               nextSize = sizes[i+1];
-  //             }
-  //         }
+      for (int j = 0; j < sizes[i] - 1 + isBiasLayer; j++) {
+        for (int k = 0; k < nextSize; k++) {
+          if (randNeuron != 1 && j < sizes[i] - 1 + isBiasLayer - 1) {
+            layers[i].weights[j][k] = neural.layers[i].weights[j][k];
+          } else {
+            layers[i].weights[j][k] = (_random.nextInt(200) - 100) / 100.0;
+          }
 
-  //         if(i < neural.biasCount)
-  //         {
-  //             isBiasLayer = 1;
-  //             layers[i] = Layer(sizes[i] - 1, nextSize, true);
-  //         }
-  //         else
-  //         {
-  //             layers[i] = Layer(sizes[i], nextSize, false);
-  //         }
+          rand = _random.nextDouble();
 
-  //         for (int j = 0; j < sizes[i] - 1 + isBiasLayer; j++)
-  //         {
-  //             for (int k = 0; k < nextSize; k++)
-  //             {
-  //                 if(randNeuron != 1 && j < sizes[i] - 1 + isBiasLayer -1) {
-  //                   layers[i].weights[j, k] = neural.layers[i].weights[j,k];
-  //                 } else {
-  //                   layers[i].weights[j, k] = UnityEngine.Random.Range(-1f, 1f);
-  //                 }
+          if (rand < 1 * mutationWeights) {
+            layers[i].weights[j][k] += (_random.nextDouble() - 0.5) * 0.5;
+          }
 
-  //                 rand = UnityEngine.Random.value;
-
-  //                 if(rand < 1f * mutationWeights) {
-  //                   layers[i].weights[j, k] += UnityEngine.Random.Range(-0.25f * mutationWeights, 0.25f * mutationWeights);
-  //                 }
-  //                     //layers[i].weights[j, k] = w + UnityEngine.Random.Range(-Mathf.Min(0.05f, 1 + w), Mathf.Min(0.05f, 1 - w));
-  //                 if(rand < 0.2f * mutationWeights) {
-  //                   layers[i].weights[j, k] += UnityEngine.Random.Range(-2f * mutationWeights, 2f * mutationWeights);
-  //                 }
-  //                     //layers[i].weights[j, k] = w + UnityEngine.Random.Range(-Mathf.Min(0.5f, 1 + w), Mathf.Min(0.5f, 1 - w));
-  //             }
-  //         }
-
-  //     }
-
-  // }
+          if (rand < 0.2 * mutationWeights) {
+            layers[i].weights[j][k] += (_random.nextDouble() - 0.5) * 2;
+          }
+        }
+      }
+    }
+  }
 
   List<double> feedForward(List<double> inputs) {
     for (int i = 0; i < inputs.length; i++) {
