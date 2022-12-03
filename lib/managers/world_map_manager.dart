@@ -53,7 +53,7 @@ class WorldMapManager {
         worldMap.agent[pos] = Agent(
           id: 0,
           createdAt: DateTime.now(),
-          energy: Random().nextInt(100),
+          energy: Random().nextInt(4000),
           direction: Pos(0, 0),
           brain: AgentBrain(),
         );
@@ -103,8 +103,12 @@ class WorldMapManager {
       }
     }
 
-    if (agentCount < 50) {
-      spawnAgent();
+    // if (agentCount < 50) {
+    //   spawnAgent();
+    // }
+    if (stats.stepCount % 100 == 0) {
+      print('$agentCount ! $natureCount');
+      print('${stats.agentEnergy} ? ${stats.natureEnergy}');
     }
 
     statsNotifier.edit(

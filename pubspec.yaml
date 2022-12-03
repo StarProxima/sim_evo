@@ -23,8 +23,7 @@ dependencies:
   freezed_annotation: ^2.1.0
   theme_tailor_annotation: ^1.0.3
 
-  perceptron:
-    path: packages/perceptron
+ 
   
 
 dev_dependencies:

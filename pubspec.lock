@@ -354,13 +354,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.5"
-  memoize:
-    dependency: transitive
-    description:
-      name: memoize
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   meta:
     dependency: transitive
     description:
@@ -403,13 +396,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  perceptron:
-    dependency: "direct main"
-    description:
-      path: "packages/perceptron"
-      relative: true
-    source: path
-    version: "0.0.0"
   petitparser:
     dependency: transitive
     description:
