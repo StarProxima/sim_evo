@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:proxima_logger/proxima_logger.dart';
 import 'features/app_paint/app_paint.dart';
 import 'features/side_panel/view/side_panel.dart';
+import 'logger.dart';
 
 void main() {
   runApp(
@@ -27,6 +29,10 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    logger.log(
+      Log.info,
+      title: 'HomePage',
+    );
     return Scaffold(
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
